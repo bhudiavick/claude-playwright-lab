@@ -26,6 +26,10 @@ export class PlaywrightHomePage {
     await this.getStartedLink.click();
   }
 
+  async expectGetStartedVisible(): Promise<void> {
+  await expect(this.getStartedLink).toBeVisible();
+}
+
   async expectInstallationHeadingVisible(): Promise<void> {
     await expect(this.installationHeading).toBeVisible();
   }
