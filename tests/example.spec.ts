@@ -1,18 +1,17 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+import { PlaywrightHomePage } from './pages/playwrightHomePage';
 
 test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  const home = new PlaywrightHomePage(page);
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  await home.goto();
+  await home.expectTitleContainsPlaywright();
 });
 
 test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  const home = new PlaywrightHomePage(page);
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await home.goto();
+  await home.clickGetStarted();
+  await home.expectInstallationHeadingVisible();
 });
